@@ -8,6 +8,8 @@ docker build --build-arg APP_VERSION="$TAG" -t "$IMAGE" app/
 docker push "$IMAGE"
 TAG="$TAG" docker compose up -d
 
+sleep 2
+
 for i in $(seq 1 30); do
   if curl -fsS localhost:8080/ >/dev/null 2>&1; then
     echo "$TAG" > .last-good
